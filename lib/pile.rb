@@ -31,6 +31,7 @@ class Box
   end
   
   def put(smaller_box)
+    raise if smaller_box.size >= self.size
     @boxes_within << smaller_box
   end
 end

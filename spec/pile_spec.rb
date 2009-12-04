@@ -47,12 +47,22 @@ describe Box do
     box = Box.new(1)
     box.size.should == 1
   end
-  
-  it "should be able to receive a box to be put into" do
-    box = Box.new(4)
-    box_within = Box.new(2)
-    box.put(box_within)
-    box.boxes_within.should == [box_within]
+
+  context "when receiving boxes to put within" do  
+    before :each do
+      @box = Box.new(4)
+    end
+
+    it "should be able put them into and return a list containing it" do
+      box_within = Box.new(2)
+      @box.put(box_within)
+      @box.boxes_within.should == [box_within]
+    end
+    
+    it "should return an error if the received box size is bigger or equal than itself" do
+      box_within = Box.new(5)
+      lambda { @box.put(box_within) }.should raise_error
+    end
   end
   
   context "when asked about the remaining space inside of it" do 
