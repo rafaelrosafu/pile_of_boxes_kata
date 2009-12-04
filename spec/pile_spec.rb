@@ -16,6 +16,11 @@ describe Pile do
       pile = Pile.new(1)
       pile.height.should == 1
     end
+
+    it "with size 1, it should have a height of 5" do
+      pile = Pile.new(5)
+      pile.height.should == 5
+    end
   end
 end
 
