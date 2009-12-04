@@ -22,5 +22,12 @@ describe Pile do
       pile.height.should == 5
     end
   end
+
+  context "given 2 boxes" do
+    it "with sizes 1 and 2, it should have a height of 3" do
+      pile = Pile.new(1,2)
+      pile.height.should == 3
+    end
+  end
 end
 
