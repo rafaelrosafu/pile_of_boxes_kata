@@ -82,6 +82,29 @@ describe Pile do
         it "the first box should have 1 box inside" do
           @pile.boxes.first.boxes_within.length.should == 1
         end
+
+        it "the first box depth should be 2" do
+          @pile.boxes.first.depth.should == 2
+        end
+      end
+    end
+
+    context "given 4 boxes" do
+      context "with sizes 4, 3, 2 and 1" do
+        before :each do
+          @pile = Pile.new(4,3,2,1)
+        end
+        it "should have a height of 4" do
+          @pile.height.should == 4
+        end
+
+        it "the first box should have 1 box inside" do
+          @pile.boxes.first.boxes_within.length.should == 1
+        end
+
+        it "the first box depth should be 3" do
+          @pile.boxes.first.depth.should == 3
+        end
       end
     end
 
@@ -138,10 +161,11 @@ describe Box do
       box.remaining_space.should == 3
     end
 
-    it "when it contains a box, it should be its height minus the box within" do
+    it "when it contains a box, it should be its height minus the sum of the height of the boxes within" do
       box = Box.new(3)
       box.put(Box.new(1))
-      box.remaining_space.should == 2
+      box.put(Box.new(1))
+      box.remaining_space.should == 1
     end
   end
 

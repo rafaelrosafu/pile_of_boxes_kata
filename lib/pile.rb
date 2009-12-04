@@ -7,10 +7,9 @@ class Pile
     @boxes = [Box.new(box_sizes.shift)]
     box_sizes.each do |box_size|
       box = Box.new(box_size)
-
-      if @boxes.last.can_fit?(box)
-        @boxes.last.put(box) 
-      else
+      begin
+        @boxes.last.put(box)
+      rescue Exception => error
         @boxes << box
       end
     end
@@ -47,10 +46,21 @@ class Box
     (size > box.size) && (remaining_space >= box.size)
   end
   
+  def depth
+    sub_depth = @boxes_within.reduce(0) {|sum, box_within| sum += box_within.depth}
+    @boxes_within.length + sub_depth
+  end
+  
   def put(smaller_box)
+    puts "Colocando uma caixa tamanho #{smaller_box.size} dentro de #{size}"
     raise Error::BoxIsTooBig if smaller_box.size >= size
     raise Error::NotEnoughSpace if remaining_space < smaller_box.size
-    @boxes_within << smaller_box if @boxes_within.empty?
+
+    if @boxes_within.empty? || !@boxes_within.last.can_fit?(smaller_box)
+      @boxes_within << smaller_box
+    else
+      @boxes_within.last.put(smaller_box)
+    end
   end
   
   private
