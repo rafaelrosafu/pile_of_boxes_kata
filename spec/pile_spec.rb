@@ -61,7 +61,12 @@ describe Box do
     
     it "should return an error if the received box size is bigger or equal than itself" do
       box_within = Box.new(5)
-      lambda { @box.put(box_within) }.should raise_error
+      lambda { @box.put(box_within) }.should raise_error(Box::Error::BoxIsTooBig)
+    end
+
+    it "should return an error if there's no more space within it" do
+      @box.put(Box.new(2))
+      lambda { @box.put(Box.new(3)) }.should raise_error(Box::Error::NotEnoughSpace)
     end
   end
   
@@ -72,7 +77,6 @@ describe Box do
     end
 
     it "when it contains a box, it should be its height minus the box within" do
-      pending
       box = Box.new(3)
       box.put(Box.new(1))
       box.remaining_space.should == 2
