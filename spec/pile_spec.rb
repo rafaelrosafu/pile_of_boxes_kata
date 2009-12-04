@@ -47,4 +47,11 @@ describe Box do
     box = Box.new(1)
     box.size.should == 1
   end
+  
+  context "when asked about the remaining space inside of it" do 
+    it "when empty it should be equal its height when created" do
+      box = Box.new(3)
+      box.remaining_space.should == 3
+    end
+  end
 end
