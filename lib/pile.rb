@@ -34,9 +34,6 @@ class Box
   end
   
   def remaining_space
-    occupied_space = @boxes_within.reduce(0) do |sum, box_within|
-      sum += box_within.size
-    end
     @size - occupied_space
   end
   
@@ -45,4 +42,11 @@ class Box
     raise Error::NotEnoughSpace if remaining_space < smaller_box.size
     @boxes_within << smaller_box
   end
+  
+  private
+    def occupied_space
+      @boxes_within.reduce(0) do |sum, box_within|
+        sum += box_within.size
+      end
+    end
 end
