@@ -6,7 +6,12 @@ class Pile
 
     @boxes = [Box.new(box_sizes.shift)]
     box_sizes.each do |box_size|
-      @boxes << Box.new(box_size)
+      box = Box.new(box_size)
+      if @boxes.last.can_fit?(box)
+        @boxes.last.put(box) 
+      else
+        @boxes << box
+      end
     end
     @boxes
   end
@@ -35,6 +40,10 @@ class Box
   
   def remaining_space
     @size - occupied_space
+  end
+  
+  def can_fit?(box)
+    (size > box.size) && (remaining_space >= box.size)
   end
   
   def put(smaller_box)

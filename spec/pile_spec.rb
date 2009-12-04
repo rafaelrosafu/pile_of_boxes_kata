@@ -35,7 +35,6 @@ describe Pile do
     end
 
     it "with sizes 2 and 1, it should have a height of 2" do
-      pending
       pile = Pile.new(2,1)
       pile.height.should == 2
     end
@@ -80,6 +79,42 @@ describe Box do
       box = Box.new(3)
       box.put(Box.new(1))
       box.remaining_space.should == 2
+    end
+  end
+
+  context "when asked if it can fit a given box" do
+    before :each do
+      @box = Box.new(3)
+    end
+
+    context "should respond true" do
+      it "if it has remaining space" do
+        smaller_box = Box.new(2)
+        @box.can_fit?(smaller_box).should be_true
+      end
+
+      it "if it's bigger than the received box" do
+        smaller_box = Box.new(2)
+        @box.can_fit?(smaller_box).should be_true
+      end
+    end
+
+    context "should respond false" do
+      it "if it doesn't have remaining space" do
+        smaller_box = Box.new(2)
+        @box.put(smaller_box)
+        @box.can_fit?(smaller_box).should be_false
+      end
+
+      it "if it's smaller than the received box" do
+        bigger_box = Box.new(4)
+        @box.can_fit?(bigger_box).should be_false
+      end
+
+      it "if it's of equal size to the received box" do
+        equal_box = Box.new(3)
+        @box.can_fit?(equal_box).should be_false
+      end
     end
   end
 end
