@@ -1,14 +1,14 @@
 class Pile
   attr_reader :boxes
 
-  def initialize(*boxes)
+  def initialize(*box_sizes)
     @height = nil
-    @boxes = boxes
+    @boxes = box_sizes.map {|box_size| Box.new(box_size)}
   end
 
   def height
     @height ||= boxes.reduce(0) do |sum, box|
-      sum += box
+      sum += box.size
     end
   end
 end

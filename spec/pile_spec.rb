@@ -8,7 +8,7 @@ describe Pile do
 
   it "should receive a list of boxes" do
     pile = Pile.new(1,2,3)
-    pile.boxes.should == [1,2,3]
+    pile.boxes.should be_a(Array)
   end
 
   context "given 1 box" do
