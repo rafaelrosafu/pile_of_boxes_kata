@@ -2,11 +2,12 @@ class Pile
   attr_reader :boxes
 
   def initialize(*boxes)
+    @height = 0
     @boxes = boxes
   end
 
   def height
-    0
+    @height = boxes.first
   end
 end
 
