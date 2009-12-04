@@ -23,20 +23,44 @@ describe Pile do
     end
   end
 
-  context "given 2 boxes" do
-    it "with sizes 1 and 2, it should have a height of 3" do
-      pile = Pile.new(1,2)
-      pile.height.should == 3
+  context "given no permeability" do
+    context "given 2 boxes" do
+      it "with sizes 1 and 2, it should have a height of 3" do
+        pile = Pile.new(1,2)
+        pile.height.should == 3
+      end
+
+      it "with sizes 1 and 1, it should have a height of 2" do
+        pile = Pile.new(1,1)
+        pile.height.should == 2
+      end
+
+      it "with sizes 2 and 1, it should have a height of 2" do
+        pile = Pile.new(2,1)
+        pile.height.should == 2
+      end
+
+      it "with sizes 2 and 3, it should have a height of 5" do
+        pile = Pile.new(2,3)
+        pile.height.should == 5
+      end
     end
 
-    it "with sizes 1 and 1, it should have a height of 2" do
-      pile = Pile.new(1,1)
-      pile.height.should == 2
-    end
+    context "given 3 boxes" do
+      it "with sizes 1, 1 and 2, it should have a height of 4" do
+        pile = Pile.new(1,1,2)
+        pile.height.should == 4
+      end
 
-    it "with sizes 2 and 1, it should have a height of 2" do
-      pile = Pile.new(2,1)
-      pile.height.should == 2
+      it "with sizes 1, 3 and 2, it should have a height of 4" do
+        pile = Pile.new(1,3,2)
+        pile.height.should == 4
+      end
+
+      it "with sizes 1, 3 and 5, it should have a height of 9" do
+        pile = Pile.new(1,3,5)
+        pile.height.should == 9
+      end
     end
   end
 end

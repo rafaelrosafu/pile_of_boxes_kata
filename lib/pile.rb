@@ -7,6 +7,7 @@ class Pile
     @boxes = [Box.new(box_sizes.shift)]
     box_sizes.each do |box_size|
       box = Box.new(box_size)
+
       if @boxes.last.can_fit?(box)
         @boxes.last.put(box) 
       else
