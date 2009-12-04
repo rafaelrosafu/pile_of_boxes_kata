@@ -50,7 +50,7 @@ class Box
   def put(smaller_box)
     raise Error::BoxIsTooBig if smaller_box.size >= size
     raise Error::NotEnoughSpace if remaining_space < smaller_box.size
-    @boxes_within << smaller_box
+    @boxes_within << smaller_box if @boxes_within.empty?
   end
   
   private

@@ -61,6 +61,45 @@ describe Pile do
         pile = Pile.new(1,3,5)
         pile.height.should == 9
       end
+
+      it "with sizes 3, 2 and 2, it should have a height of 5" do
+        pile = Pile.new(3,2,2)
+        pile.height.should == 5
+      end
+    end
+  end
+  
+  context "given permeability" do
+    context "given 3 boxes" do
+      context "with sizes 3, 2 and 1" do
+        before :each do
+          @pile = Pile.new(3,2,1)
+        end
+        it "should have a height of 3" do
+          @pile.height.should == 3
+        end
+
+        it "the first box should have 1 box inside" do
+          @pile.boxes.first.boxes_within.length.should == 1
+        end
+      end
+    end
+
+    context "given 5 boxes" do
+      context "with sizes 2, 3 and 1" do
+        before :each do
+          @pile = Pile.new(2,3,1)
+        end
+
+        it "should have a height of 5" do
+          @pile.height.should == 5
+        end
+
+        it "should have one box inside de first box" do
+          pending
+          @pile.boxes.first.boxes_within.length.should == 1
+        end
+      end
     end
   end
 end
