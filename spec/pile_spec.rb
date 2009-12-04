@@ -28,6 +28,23 @@ describe Pile do
       pile = Pile.new(1,2)
       pile.height.should == 3
     end
+
+    it "with sizes 1 and 1, it should have a height of 2" do
+      pile = Pile.new(1,1)
+      pile.height.should == 2
+    end
+
+    it "with sizes 2 and 1, it should have a height of 2" do
+      pending
+      pile = Pile.new(2,1)
+      pile.height.should == 2
+    end
   end
 end
 
+describe Box do
+  it "should have its size given by the initializer" do
+    box = Box.new(1)
+    box.size.should == 1
+  end
+end

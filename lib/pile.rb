@@ -13,3 +13,9 @@ class Pile
   end
 end
 
+class Box
+  attr_reader :size
+  def initialize(size)
+    @size = size
+  end
+end
