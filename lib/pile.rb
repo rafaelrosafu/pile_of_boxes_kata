@@ -3,7 +3,11 @@ class Pile
 
   def initialize(*box_sizes)
     @height = nil
-    @boxes = box_sizes.map {|box_size| Box.new(box_size)}
+    @boxes = [Box.new(box_sizes.shift)]
+    box_sizes.each do |box_size|
+      @boxes << Box.new(box_size)
+    end
+    @boxes
   end
 
   def height
