@@ -48,10 +48,24 @@ describe Box do
     box.size.should == 1
   end
   
+  it "should be able to receive a box to be put into" do
+    box = Box.new(4)
+    box_within = Box.new(2)
+    box.put(box_within)
+    box.boxes_within.should == [box_within]
+  end
+  
   context "when asked about the remaining space inside of it" do 
     it "when empty it should be equal its height when created" do
       box = Box.new(3)
       box.remaining_space.should == 3
+    end
+
+    it "when it contains a box, it should be its height minus the box within" do
+      pending
+      box = Box.new(3)
+      box.put(Box.new(1))
+      box.remaining_space.should == 2
     end
   end
 end

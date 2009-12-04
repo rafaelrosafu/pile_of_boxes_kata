@@ -19,13 +19,18 @@ class Pile
 end
 
 class Box
-  attr_reader :size
+  attr_reader :size, :boxes_within
 
   def initialize(size)
     @size = size
+    @boxes_within = []
   end
   
   def remaining_space
     @size
+  end
+  
+  def put(smaller_box)
+    @boxes_within << smaller_box
   end
 end
